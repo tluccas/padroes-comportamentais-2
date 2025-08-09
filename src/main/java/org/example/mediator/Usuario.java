@@ -1,27 +1,22 @@
 package org.example.mediator;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Usuario {
 
     private String nome;
-    private List<Usuario> contatos = new ArrayList<>();
+    private ChatMediator mediator;
 
-    public Usuario(String nome) {
+    public Usuario(String nome, ChatMediator mediator) {
         this.nome = nome;
+        this.mediator = mediator;
+        mediator.registraUsuario(this);
     }
 
     public void adicionaContato(Usuario usuario) {
-        contatos.add(usuario);
+        mediator.adicionaContato(this, usuario);
     }
 
     public void enviaMensagem(String mensagem, Usuario destinatario) {
-        if (contatos.contains(destinatario)) {
-            destinatario.receberMensagem(mensagem, this);
-        } else {
-            System.out.println("Usuário " + destinatario.getNome() + " não está na sua lista de contatos.");
-        }
+        mediator.enviarMensagem(mensagem, this, destinatario);
     }
 
     public void receberMensagem(String mensagem, Usuario remetente) {

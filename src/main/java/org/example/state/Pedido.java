@@ -2,34 +2,26 @@ package org.example.state;
 
 public class Pedido {
 
-    private String estado;
+    private EstadoPedido estado;
 
     public Pedido() {
-        this.estado = "Novo";
+        this.estado = new EstadoNovo();
+    }
+
+    public void setEstado(EstadoPedido estado) {
+        this.estado = estado;
     }
 
     public void mudarEstado() {
-        if (estado.equals("Novo")) {
-            estado = "Processando";
-        } else if (estado.equals("Processando")) {
-            estado = "Enviado";
-        } else if (estado.equals("Enviado")) {
-            estado = "Entregue";
-        } else {
-            System.out.println("O pedido já foi entregue.");
-        }
+        estado.mudarEstado(this);
     }
 
     public void cancelar() {
-        if (estado.equals("Novo") || estado.equals("Processando")) {
-            estado = "Cancelado";
-            System.out.println("Pedido cancelado.");
-        } else {
-            System.out.println("O pedido não pode ser cancelado.");
-        }
+        estado.cancelar(this);
     }
 
     public void mostrarEstado() {
-        System.out.println("Estado atual do pedido: " + estado);
+        estado.mostrarEstado();
     }
 }
+

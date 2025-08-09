@@ -3,9 +3,11 @@ package org.example.mediator;
 public class Main {
     public static void main(String[] args) {
 
-        Usuario maria = new Usuario("Maria");
-        Usuario joao = new Usuario("João");
-        Usuario carlos = new Usuario("Carlos");
+        ChatMediator chatMediator = new ChatMediator();
+
+        Usuario maria = new Usuario("Maria", chatMediator);
+        Usuario joao = new Usuario("João", chatMediator);
+        Usuario carlos = new Usuario("Carlos", chatMediator);
 
         maria.adicionaContato(joao);
         joao.adicionaContato(carlos);
